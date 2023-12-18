@@ -120,6 +120,15 @@ app.post("/patients/:id/labs", async (req, res) => {
     } 
 })
 
+app.get("/patients", async (req, res) => {
+    console.log(req.body);
+    const patients = await Patient.find({});
+    if(!patients) {
+        res.send("No patients found");
+    }
+    res.json(patients);
+})
+
 mongoose.connect('mongodb+srv://themrdee:kaRNXVTrNF7iTsiX@cluster0.tzt20ql.mongodb.net/node-api?retryWrites=true&w=majority')
   .then(() => {
     console.log('Connected to MongoDB!')
