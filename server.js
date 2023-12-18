@@ -76,7 +76,7 @@ app.post("/patients/emergency", async (req, res) => {
     }
 })
 
-app.post("/visitation", async (req, res) => {
+app.post("/patients/visitation", async (req, res) => {
     console.log(req.body);
     const visitationObj = new Visitation({
 
