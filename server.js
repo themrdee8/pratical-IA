@@ -60,7 +60,7 @@ app.post('/patients', async (req, res) => {
     }
 })
 
-app.post("/emergency", async (req, res) => {
+app.post("/patients/emergency", async (req, res) => {
     console.log(req.body);
     const emergencyObj = new Emergency({
         name: req.body.name,
@@ -127,6 +127,16 @@ app.get("/patients", async (req, res) => {
         res.send("No patients found");
     }
     res.json(patients);
+})
+
+app.get("/patients/:id", async (req, res) => {
+    const id = req.params.id;
+    const patient = await Patient.findById(id);
+    if(!patient) {
+        res.send("No patients found");
+        return;
+    }
+    res.json(patient);
 })
 
 mongoose.connect('mongodb+srv://themrdee:kaRNXVTrNF7iTsiX@cluster0.tzt20ql.mongodb.net/node-api?retryWrites=true&w=majority')
