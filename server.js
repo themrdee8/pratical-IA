@@ -12,13 +12,13 @@ const patientSchema = new Schema({
 
 const Patient = mongoose.model('Patient', patientSchema);
 
-/* const emergencySchema = new Schema({
+const emergencySchema = new Schema({
     name: String,
     contact: String,
     relationship: String,
 })
 
-const Emergency = mongoose.model('Emergency', emergencySchema); */
+const Emergency = mongoose.model('Emergency', emergencySchema);
 
 /* const visitationSchema = new Schema({ 
     id: { type: String, required: true },
@@ -51,7 +51,7 @@ app.post('/patients', async (req, res) => {
     }
 })
 
-/* app.post("/emergency", async (req, res) => {
+app.post("/emergency", async (req, res) => {
     console.log(req.body);
     const emergencyObj = new Emergency({
         name: req.body.name,
@@ -65,7 +65,7 @@ app.post('/patients', async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-}) */
+})
 
 /* app.post("/visitation", async (req, res) => {
     console.log(req.body);
