@@ -28,6 +28,15 @@ const visitationSchema = new Schema({
 
 const Visitation = mongoose.model('Visitation', visitationSchema);
 
+const labsSchema = new Schema({
+    bloodPressure: String,
+    temperature: String,
+    pulse: String,
+    sp02: String,
+})
+
+const Labs = mongoose.model('Labs', labsSchema);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 
@@ -79,6 +88,36 @@ app.post("/visitation", async (req, res) => {
     console.log(error.message);
     res.status(500).json({message: error.message});
    }
+})
+
+app.post("/patients/:id/labs", async (req, res) => {
+    const id = req.params.id;
+    const { bloodPressure, temperature, pulse, sp02 } = req.body;
+    try {
+        const patient = await Patient.findById(id);
+        if (!patient) {
+            res.send(404).json({ message: "Patient not found"});
+        } else {
+            const labsObj = new Labs({
+                bloodPressure,
+                temperature,
+                pulse,
+                sp02
+            })
+        }
+        const labs = await labsObj.save();
+        res.send(200).json({
+            id: patient.id,
+            name: patient.name,
+            bloodPressure: labs.bloodPressure,
+            temperature: labs.temperature,
+            pulse: labs.pulse,
+            sp02: labs.sp02
+        });
+    } catch (error) {
+        console.log(error);
+        res.send(404).json({ message: "Error saving labs" });
+    } 
 })
 
 mongoose.connect('mongodb+srv://themrdee:kaRNXVTrNF7iTsiX@cluster0.tzt20ql.mongodb.net/node-api?retryWrites=true&w=majority')
