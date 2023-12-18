@@ -20,13 +20,13 @@ const emergencySchema = new Schema({
 
 const Emergency = mongoose.model('Emergency', emergencySchema);
 
-/* const visitationSchema = new Schema({ 
+const visitationSchema = new Schema({ 
     id: { type: String, required: true },
     date: Date,
     encounter: [String, "Emergency / OPD / Specialist Care"]
 })
 
-const Visitation = mongoose.model('Visitation', visitationSchema); */
+const Visitation = mongoose.model('Visitation', visitationSchema);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
@@ -67,7 +67,7 @@ app.post("/emergency", async (req, res) => {
     }
 })
 
-/* app.post("/visitation", async (req, res) => {
+app.post("/visitation", async (req, res) => {
     console.log(req.body);
     const visitationObj = new Visitation({
 
@@ -79,7 +79,7 @@ app.post("/emergency", async (req, res) => {
     console.log(error.message);
     res.status(500).json({message: error.message});
    }
-}) */
+})
 
 mongoose.connect('mongodb+srv://themrdee:kaRNXVTrNF7iTsiX@cluster0.tzt20ql.mongodb.net/node-api?retryWrites=true&w=majority')
   .then(() => {
